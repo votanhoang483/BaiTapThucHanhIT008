@@ -1,0 +1,7 @@
+C:\Users\hoang\OneDrive\Documents\Đại học\Học kỳ 3\IT008 - Lập trình trực quan\BaiTapThucHanhIT008\Bai1.6\Bai1.6\obj\Debug\Bai1.6.csproj.AssemblyReference.cache
+C:\Users\hoang\OneDrive\Documents\Đại học\Học kỳ 3\IT008 - Lập trình trực quan\BaiTapThucHanhIT008\Bai1.6\Bai1.6\obj\Debug\Bai1.6.csproj.CoreCompileInputs.cache
+C:\Users\hoang\OneDrive\Documents\Đại học\Học kỳ 3\IT008 - Lập trình trực quan\BaiTapThucHanhIT008\Bai1.6\Bai1.6\bin\Debug\Bai1.6.exe.config
+C:\Users\hoang\OneDrive\Documents\Đại học\Học kỳ 3\IT008 - Lập trình trực quan\BaiTapThucHanhIT008\Bai1.6\Bai1.6\bin\Debug\Bai1.6.exe
+C:\Users\hoang\OneDrive\Documents\Đại học\Học kỳ 3\IT008 - Lập trình trực quan\BaiTapThucHanhIT008\Bai1.6\Bai1.6\bin\Debug\Bai1.6.pdb
+C:\Users\hoang\OneDrive\Documents\Đại học\Học kỳ 3\IT008 - Lập trình trực quan\BaiTapThucHanhIT008\Bai1.6\Bai1.6\obj\Debug\Bai1.6.exe
+C:\Users\hoang\OneDrive\Documents\Đại học\Học kỳ 3\IT008 - Lập trình trực quan\BaiTapThucHanhIT008\Bai1.6\Bai1.6\obj\Debug\Bai1.6.pdb
