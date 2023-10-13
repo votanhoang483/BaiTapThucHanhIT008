@@ -16,7 +16,7 @@ namespace Bai1._6
         {
             void intelligent_behavior();
         }
-        interface IAbility: IThinking, IIntellingent
+        interface IAbility : IThinking, IIntellingent
         {
 
         }
@@ -24,14 +24,14 @@ namespace Bai1._6
         {
             public string characteristics;
         }
-        public class Whale: Mamal
+        public class Whale : Mamal
         {
             public Whale()
             {
 
             }
         }
-        public class Human: Mamal, IAbility
+        public class Human : Mamal, IAbility
         {
             public Human()
             {
