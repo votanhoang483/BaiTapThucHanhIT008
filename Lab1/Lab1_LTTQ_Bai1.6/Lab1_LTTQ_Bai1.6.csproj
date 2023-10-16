@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D46B5B06-A5E6-4ECB-9D99-7CCEAD0D5F32}</ProjectGuid>
+    <ProjectGuid>{B339D23D-9B7C-4C61-A6E8-4906A3CB4C0C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Bai1._6</RootNamespace>
-    <AssemblyName>Bai1.6</AssemblyName>
+    <RootNamespace>Lab1_LTTQ_Bai1._6</RootNamespace>
+    <AssemblyName>Lab1_LTTQ_Bai1.6</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
