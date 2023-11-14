@@ -12,25 +12,20 @@ namespace Bai2_8
 {
     public partial class Form1 : Form
     {
-        // Set-Up
         private List<Point> pointsList;
         Pen pen = new Pen(Color.Black, 1);
         Color color = Color.Black;
         private bool drawing;
         private bool moving;
         private string option;
-        // Picture Save
         private Bitmap drawingBitmap;
-        // Rectangle
         private Rectangle rectangle;
         private bool resizing;
         private Point startPoint;
         private Point previousLocation;
-        // Circle
         private Rectangle circleBounds;
         public Form1()
         {
-            // Set-Up
             InitializeComponent();
             pointsList = new List<Point>();
             drawing = false;
@@ -39,7 +34,6 @@ namespace Bai2_8
             option = "FreeDraw";
             rectangle = new Rectangle();
             circleBounds = new Rectangle();
-            // Customizing
             this.BackColor = SystemColors.GradientActiveCaption;
             this.Width = 750;
             this.Height = 600;
@@ -50,7 +44,6 @@ namespace Bai2_8
             drawingBitmap = new Bitmap(this.Width, this.Height);
             pictureBox1.BackColor = Color.White;
             pictureBox1.Image = drawingBitmap;
-            // PictureBox=Form
             pictureBox1.Paint += pictureBox1_Paint;
             pictureBox1.MouseDown += Form1_MouseDown;
             pictureBox1.MouseUp += Form1_MouseUp;
@@ -215,7 +208,7 @@ namespace Bai2_8
                 }
             }
         }
-        private void button1_Click(object sender, EventArgs e) //Save
+        private void button1_Click(object sender, EventArgs e) 
         {
             using (Bitmap bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height))
             {
@@ -232,39 +225,32 @@ namespace Bai2_8
             }
         }
 
-        private void button2_Click(object sender, EventArgs e) //Free
+        private void button2_Click(object sender, EventArgs e) 
         {
             option = "FreeDraw";
         }
 
-        private void button3_Click(object sender, EventArgs e) //Rectangle
+        private void button3_Click(object sender, EventArgs e) 
         {
             option = "Rectangle";
         }
 
-        private void button4_Click(object sender, EventArgs e) //Circle
+        private void button4_Click(object sender, EventArgs e) 
         {
             option = "Circle";
         }
 
-        private void button5_Click(object sender, EventArgs e) //Help
+        private void button5_Click(object sender, EventArgs e) 
         {
-            MessageBox.Show("Free Draw: Vẽ Tự Do\nRectangle: Vẽ Hình Chữ Nhật\nEllipse: Vẽ Hình Tròn\n" +
-                "Khi vẽ Hình Chữ Nhật hoặc hình tròn, di chuyển chuột\n" +
-                "trái để vẽ và chỉnh độ lớn, click chuột trái sau khi vẽ\n" +
-                "để đổi vị trí, click chuột phải để 'lưu' hình đã vẽ.", "hướng dẫn");
+            MessageBox.Show("Khi vẽ hình chữ nhật hoặc hình tròn, ấn, giữ và di chuyển chuột trái để vẽ và chỉnh độ lớn, click chuột trái sau khi vẽ để đổi vị trí, click chuột phải để cố định hình đã vẽ.", "Hướng dẫn");
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Show();
-            MessageBox.Show("Free Draw: Vẽ Tự Do\nRectangle: Vẽ Hình Chữ Nhật\nEllipse: Vẽ Hình Tròn\n" +
-                "Khi vẽ Hình Chữ Nhật hoặc hình tròn, di chuyển chuột\n" +
-                "trái để vẽ và chỉnh độ lớn, click chuột trái sau khi vẽ\n" +
-                "để đổi vị trí, click chuột phải để 'lưu' hình đã vẽ.", "hướng dẫn");
+            
         }
 
-        private void button7_Click(object sender, EventArgs e) //Clear
+        private void button7_Click(object sender, EventArgs e) 
         {
             using (Graphics g = Graphics.FromImage(drawingBitmap))
             {
@@ -280,7 +266,7 @@ namespace Bai2_8
             circleBounds = new Rectangle();
         }
 
-        private void button6_Click(object sender, EventArgs e) //Change Color
+        private void button6_Click(object sender, EventArgs e) 
         {
             ColorDialog colorDialog = new ColorDialog();
 
