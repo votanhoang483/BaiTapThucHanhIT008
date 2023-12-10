@@ -71,10 +71,12 @@ namespace doan_TH
            
         }
         private void btnPlay_Click(object sender, RoutedEventArgs e)
-        {
-                string fullFilePath = fileMap[content]; 
+        {       if (content!=null)
+            {
+                string fullFilePath = fileMap[content];
                 mediaPlayer.Open(new Uri(fullFilePath));
                 mediaPlayer.Play();
+            }
             
         }
         private void btnPrevious_Click(object sender, RoutedEventArgs e)

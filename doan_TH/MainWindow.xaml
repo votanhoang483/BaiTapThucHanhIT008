@@ -41,11 +41,14 @@
                         </Button>
                     </Grid>
                     <Image Margin="10" Height="200" x:Name="Musicimg" Stretch="Uniform" Source="C:\Users\PC\Downloads\MusicIcon.png" />
-                    <TextBlock Margin="10" FontSize="19" Text="Song name" Foreground="White" TextAlignment="Center" FontWeight="SemiBold" x:Name="lblSongname" />
-                    <TextBlock x:Name="Name" FontSize="15"  Text="Name" Foreground="White" TextAlignment="Center" FontWeight="ExtraLight" />
+                   
+                    <TextBlock Margin="10" FontSize="15" Text="Song name" Foreground="White" TextAlignment="Center" FontWeight="SemiBold" x:Name="lblSongname" />
+                    <Viewbox MaxHeight="30" Margin="15 0">
+                        <TextBlock  x:Name="Name"  Text="Choose a song" Foreground="White" TextAlignment="Center" FontWeight="ExtraLight" />
+                    </Viewbox>
                     <Grid Margin="0 30 0 0">
-                        <TextBlock FontSize="11" Text="0:00" Margin="20 0" Foreground="White" FontWeight="ExtraLight" TextAlignment="Center" HorizontalAlignment="Left" x:Name="lblCurrenttime" />
-                        <TextBlock FontSize="11" Text="0:00" Margin="20 0" Foreground="White" FontWeight="ExtraLight" TextAlignment="Center" HorizontalAlignment="Right" x:Name="lblMusiclength" />
+                    <TextBlock FontSize="11" Text="0:00" Margin="20 0" Foreground="White" FontWeight="ExtraLight" TextAlignment="Center" HorizontalAlignment="Left" x:Name="lblCurrenttime" />
+                    <TextBlock FontSize="11" Text="0:00" Margin="20 0" Foreground="White" FontWeight="ExtraLight" TextAlignment="Center" HorizontalAlignment="Right" x:Name="lblMusiclength" />
                     </Grid>
                     <Slider Value="0" Minimum="1" Maximum="50" Margin="20 0" Foreground="#FF731101" x:Name="TimerSlider" />
                     <WrapPanel HorizontalAlignment="Center" Margin="0 20">
