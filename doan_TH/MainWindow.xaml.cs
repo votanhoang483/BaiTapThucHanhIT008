@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,42 +14,53 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
-
 
 namespace doan_TH
+   
 {
+    
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<string> data;
-        private string s;
+        string fullfilepath;
+        string content;
+        string filename;
+        private ObservableCollection<string> data;
+        private Dictionary<string, string> fileMap = new Dictionary<string, string>();
+        TextBlock textBlockName;
         public MainWindow()
         {
             InitializeComponent();
-            data = new List<string>() { "Song1" };
+            
+          data = new ObservableCollection<string>() {  };
             lsvlist.ItemsSource = data;
+            textBlockName = (TextBlock)FindName("Name");
         }
         MediaPlayer mediaPlayer=new MediaPlayer();
+     
         private void Card_MouseDown(object sender, MouseEventArgs e)
         {
             DragMove();
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Application.Current.Shutdown();
         }
        private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg=new OpenFileDialog();
-            dlg.ShowDialog();
-            s=dlg.FileName;
-            dlg.ShowDialog();
-            data.Add(s);
-            lsvlist.ItemsSource= data;
+           
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                 fullfilepath = openFileDialog.FileName;
+                 filename = System.IO.Path.GetFileNameWithoutExtension(fullfilepath);
+                data.Add(filename);
+                fileMap[filename] = fullfilepath;
 
+            }
+           
         }
         private void btnReMove_Click(object sender, RoutedEventArgs e)
         {
@@ -57,12 +68,14 @@ namespace doan_TH
         }
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-
+           
         }
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-            mediaPlayer.Open(new Uri("D:\\Project1\\BaiTapThucHanhIT008\\doan_TH\\test\\5016944936596504302.mp4"));
-            mediaPlayer.Play();
+                string fullFilePath = fileMap[content]; 
+                mediaPlayer.Open(new Uri(fullFilePath));
+                mediaPlayer.Play();
+            
         }
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
@@ -72,5 +85,12 @@ namespace doan_TH
         {
             mediaPlayer.Pause();
         }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            content = button.Content as string;
+            textBlockName.Text = content;
+        }
+
     }
 }

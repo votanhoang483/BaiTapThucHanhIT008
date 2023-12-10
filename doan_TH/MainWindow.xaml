@@ -1,4 +1,4 @@
-﻿<Window x:Class="doan_TH.MainWindow"
+﻿ <Window x:Class="doan_TH.MainWindow"
         
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -42,7 +42,7 @@
                     </Grid>
                     <Image Margin="10" Height="200" x:Name="Musicimg" Stretch="Uniform" Source="C:\Users\PC\Downloads\MusicIcon.png" />
                     <TextBlock Margin="10" FontSize="19" Text="Song name" Foreground="White" TextAlignment="Center" FontWeight="SemiBold" x:Name="lblSongname" />
-                    <TextBlock FontSize="11" Text="Name" Foreground="White" TextAlignment="Center" FontWeight="ExtraLight" />
+                    <TextBlock x:Name="Name" FontSize="15"  Text="Name" Foreground="White" TextAlignment="Center" FontWeight="ExtraLight" />
                     <Grid Margin="0 30 0 0">
                         <TextBlock FontSize="11" Text="0:00" Margin="20 0" Foreground="White" FontWeight="ExtraLight" TextAlignment="Center" HorizontalAlignment="Left" x:Name="lblCurrenttime" />
                         <TextBlock FontSize="11" Text="0:00" Margin="20 0" Foreground="White" FontWeight="ExtraLight" TextAlignment="Center" HorizontalAlignment="Right" x:Name="lblMusiclength" />
@@ -82,20 +82,20 @@
                         </RadialGradientBrush>
                     </Grid.Background>
 
-                    <ScrollViewer HorizontalScrollBarVisibility="Hidden" >
-                        <ListView x:Name="lsvlist"   >
-                            <ListView.ItemTemplate >
-                                <DataTemplate>
-                                    <Grid>
+                    <ListView x:Name="lsvlist"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                        <ListView.ItemTemplate >
+                            <DataTemplate>
+                                <Grid>
 
-                                        <Button Content="{Binding}" Background="#FF731101" Foreground="White" FontSize="20" Width="460" Height="50">
-                                        </Button>
+                                    <Button  Click="Button_Click"  Content="{Binding}" Background="#FF731101" Foreground="White" FontSize="15" Width="460" Height="50">
+                                    </Button>
 
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </ScrollViewer>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
 
                 </Grid>
