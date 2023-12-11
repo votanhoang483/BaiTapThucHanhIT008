@@ -1,4 +1,4 @@
-﻿ <Window x:Class="doan_TH.MainWindow"
+﻿<Window x:Class="doan_TH.MainWindow"
         
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -41,16 +41,16 @@
                         </Button>
                     </Grid>
                     <Image Margin="10" Height="200" x:Name="Musicimg" Stretch="Uniform" Source="C:\Users\PC\Downloads\MusicIcon.png" />
-                   
+
                     <TextBlock Margin="10" FontSize="15" Text="Song name" Foreground="White" TextAlignment="Center" FontWeight="SemiBold" x:Name="lblSongname" />
                     <Viewbox MaxHeight="30" Margin="15 0">
                         <TextBlock  x:Name="Name"  Text="Choose a song" Foreground="White" TextAlignment="Center" FontWeight="ExtraLight" />
                     </Viewbox>
                     <Grid Margin="0 30 0 0">
-                    <TextBlock FontSize="11" Text="0:00" Margin="20 0" Foreground="White" FontWeight="ExtraLight" TextAlignment="Center" HorizontalAlignment="Left" x:Name="lblCurrenttime" />
-                    <TextBlock FontSize="11" Text="0:00" Margin="20 0" Foreground="White" FontWeight="ExtraLight" TextAlignment="Center" HorizontalAlignment="Right" x:Name="lblMusiclength" />
+                        <TextBlock FontSize="11" Text="00:00" Margin="20,0,0,0" Foreground="White" FontWeight="ExtraLight" TextAlignment="Center" HorizontalAlignment="Left" x:Name="lblCurrenttime" Height="15" VerticalAlignment="Top" />
+                        <TextBlock FontSize="11" Text="00:00" Margin="20 0" Foreground="White" FontWeight="ExtraLight" TextAlignment="Center" HorizontalAlignment="Right" x:Name="lblMusiclength" />
                     </Grid>
-                    <Slider Value="0" Minimum="1" Maximum="50" Margin="20 0" Foreground="#FF731101" x:Name="TimerSlider" />
+                    <Slider Value="0" Minimum="1" Maximum="50" Margin="20 0" Foreground="#FF731101" x:Name="TimerSlider" ValueChanged="TimerSlider_ValueChanged" />
                     <WrapPanel HorizontalAlignment="Center" Margin="0 20">
                         <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play Next" x:Name="btnNext" Click="btnNext_Click">
                             <StackPanel Margin="-5">
@@ -103,7 +103,7 @@
 
                 </Grid>
                 <Border Grid.Row="2" BorderBrush="#FF595757" BorderThickness="5" CornerRadius="0, 0, 20, 20">
-                <Grid Grid.Row="2" >
+                    <Grid Grid.Row="2" >
                         <Grid.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="#FF121212" Offset="1"/>
@@ -111,16 +111,16 @@
 
                             </RadialGradientBrush>
                         </Grid.Background>
-                        
 
-                       
+
+
                         <Grid Grid.Column="1">
                             <TextBox FontSize="20" Foreground="White">
-                                
+
                             </TextBox>
                         </Grid>
-                       
-                </Grid>
+
+                    </Grid>
                 </Border>
             </Grid>
         </materialDesign:Card>
