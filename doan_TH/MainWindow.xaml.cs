@@ -35,7 +35,7 @@ namespace doan_TH
         private Dictionary<string, string> fileMap = new Dictionary<string, string>();
         TextBlock textBlockName;
         private int CurrentTrackIndex;
-
+        string content1 = "";
         public MainWindow()
         {
             InitializeComponent();
@@ -124,17 +124,18 @@ namespace doan_TH
         }
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-            if (content != null && !mediaPlayer.NaturalDuration.HasTimeSpan)
+            if (content != content1 )
             {
                 string fullFilePath = fileMap[content];
                 mediaPlayer.Open(new Uri(fullFilePath));
+                content1 = content;
                 mediaPlayer.Play();
                 updateTimer.Start();
             }
-            if (content != null && mediaPlayer.NaturalDuration.HasTimeSpan)
+            if (content ==content1 )
             {
-                mediaPlayer.Play();
-            }
+               mediaPlayer.Play();
+            }   
 
         }
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
