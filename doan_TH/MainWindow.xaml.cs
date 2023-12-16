@@ -112,6 +112,9 @@ namespace doan_TH
 
         private void btnReMove_Click(object sender, RoutedEventArgs e)
         {
+            mediaPlayer.Pause();
+            data.Remove(content);
+            textBlockName.Text = "Choose a song";
 
         }
         private void btnNext_Click(object sender, RoutedEventArgs e)
