@@ -119,7 +119,7 @@ namespace doan_TH
         }
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            if (data.Count > 0)
+            if (data.Count > 0 && content != null)
             {
                 CurrentTrackIndex = (CurrentTrackIndex + 1) % data.Count;
                 PlaySelectedTrack();
@@ -127,7 +127,7 @@ namespace doan_TH
         }
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-            if (content != content1 )
+            if (content != content1 && content!=null )
             {
                 string fullFilePath = fileMap[content];
                 mediaPlayer.Open(new Uri(fullFilePath));
@@ -143,7 +143,8 @@ namespace doan_TH
         }
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
-            if(data.Count>0)
+            
+            if(data.Count>0 &&content !=null)
             {
                 CurrentTrackIndex=(CurrentTrackIndex-1+data.Count)%data.Count;
                 PlaySelectedTrack();
@@ -153,6 +154,16 @@ namespace doan_TH
         private void btnPause_Click(object sender, RoutedEventArgs e)
         {
             mediaPlayer.Pause();
+        }
+        private void btnRePlay_Click(Object sender, RoutedEventArgs e)
+        {
+            if (content != null)
+            {
+                string fullFilePath = fileMap[content];
+                mediaPlayer.Open(new Uri(fullFilePath));
+                mediaPlayer.Play();
+                updateTimer.Start();
+            }
         }
         private void PlaySelectedTrack()
         {

@@ -63,14 +63,18 @@
                                 <materialDesign:PackIcon Kind="Play" Width="20" Height="20" />
                             </StackPanel>
                         </Button>
-
+                        <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play" x:Name="btnRePlay" Click="btnRePlay_Click">
+                            <StackPanel Margin="-5">
+                                <materialDesign:PackIcon Kind="Repeat" Width="20" Height="20" />
+                            </StackPanel>
+                        </Button>
                         <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play" x:Name="btnPause" Click="btnPause_Click">
                             <StackPanel Margin="-5">
                                 <materialDesign:PackIcon Kind="Pause" Width="20" Height="20" />
                             </StackPanel>
                         </Button>
 
-                      
+
                         <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play Next" x:Name="btnNext" Click="btnNext_Click">
                             <StackPanel Margin="-5">
                                 <materialDesign:PackIcon Kind="FastForward" Width="20" Height="20" />
@@ -79,6 +83,11 @@
                     </WrapPanel>
                 </StackPanel>
                 <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="67*"/>
+                        <ColumnDefinition Width="17*"/>
+                        <ColumnDefinition Width="156*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.Background>
                         <RadialGradientBrush>
                             <GradientStop Color="#FF121212" Offset="1"/>
@@ -89,7 +98,7 @@
 
                     <ListView x:Name="lsvlist"
                               ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                              ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.ColumnSpan="3">
                         <ListView.ItemTemplate >
                             <DataTemplate>
                                 <Grid>
