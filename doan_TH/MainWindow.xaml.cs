@@ -96,12 +96,16 @@ namespace doan_TH
        private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
             if (openFileDialog.ShowDialog() == true)
             {
-                fullfilepath = openFileDialog.FileName;
-                filename = System.IO.Path.GetFileNameWithoutExtension(fullfilepath);
-                data.Add(filename);
-                fileMap[filename] = fullfilepath;
+                foreach (String file in openFileDialog.FileNames)
+                {
+                    fullfilepath = file;
+                    filename = System.IO.Path.GetFileNameWithoutExtension(fullfilepath);
+                    data.Add(filename);
+                    fileMap[filename] = fullfilepath;
+                }
 
             }
             //string sampleMusicPath = @"C:\Users\ACER\Source\Repos\BaiTapThucHanhIT008\doan_TH\bin\Debug\sample.mp3";
