@@ -52,9 +52,10 @@
                     </Grid>
                     <Slider Value="0" Minimum="1" Maximum="50" Margin="20 0" Foreground="#FF731101" x:Name="TimerSlider" ValueChanged="TimerSlider_ValueChanged" />
                     <WrapPanel HorizontalAlignment="Center" Margin="0 20">
-                        <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play Next" x:Name="btnNext" Click="btnNext_Click">
+
+                        <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play Next" x:Name="btnPrevious" Click="btnPrevious_Click">
                             <StackPanel Margin="-5">
-                                <materialDesign:PackIcon Kind="FastForward" Width="20" Height="20" />
+                                <materialDesign:PackIcon Kind="FastRewind" Width="20" Height="20" />
                             </StackPanel>
                         </Button>
                         <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play" x:Name="btnPlay" Click="btnPlay_Click">
@@ -69,9 +70,10 @@
                             </StackPanel>
                         </Button>
 
-                        <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play Next" x:Name="btnPrevious" Click="btnPrevious_Click">
+                      
+                        <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play Next" x:Name="btnNext" Click="btnNext_Click">
                             <StackPanel Margin="-5">
-                                <materialDesign:PackIcon Kind="FastRewind" Width="20" Height="20" />
+                                <materialDesign:PackIcon Kind="FastForward" Width="20" Height="20" />
                             </StackPanel>
                         </Button>
                     </WrapPanel>

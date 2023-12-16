@@ -25,6 +25,7 @@ namespace doan_TH
     /// </summary>
     public partial class MainWindow : Window
     {
+     
         private DispatcherTimer updateTimer;
         string fullfilepath;
         string content;
@@ -33,6 +34,8 @@ namespace doan_TH
         private ObservableCollection<string> data;
         private Dictionary<string, string> fileMap = new Dictionary<string, string>();
         TextBlock textBlockName;
+        private int CurrentTrackIndex;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,7 +49,14 @@ namespace doan_TH
             updateTimer = new DispatcherTimer();
             updateTimer.Interval = TimeSpan.FromSeconds(1); // Cập nhật mỗi giây
             updateTimer.Tick += updateTimer_Tick;
+            CurrentTrackIndex = 0;
         }
+        
+        private void MediaPlayer_MediaEnded(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (mediaPlayer.NaturalDuration.HasTimeSpan)
@@ -106,26 +116,51 @@ namespace doan_TH
         }
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-           
+            if (data.Count > 0)
+            {
+                CurrentTrackIndex = (CurrentTrackIndex + 1) % data.Count;
+                PlaySelectedTrack();
+            }
         }
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-            if (content != null)
+            if (content != null && !mediaPlayer.NaturalDuration.HasTimeSpan)
             {
                 string fullFilePath = fileMap[content];
                 mediaPlayer.Open(new Uri(fullFilePath));
                 mediaPlayer.Play();
                 updateTimer.Start();
             }
+            if (content != null && mediaPlayer.NaturalDuration.HasTimeSpan)
+            {
+                mediaPlayer.Play();
+            }
+
         }
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
-
+            if(data.Count>0)
+            {
+                CurrentTrackIndex=(CurrentTrackIndex-1+data.Count)%data.Count;
+                PlaySelectedTrack();
+            }
         }
+   
         private void btnPause_Click(object sender, RoutedEventArgs e)
         {
             mediaPlayer.Pause();
-            updateTimer.Stop();
+        }
+        private void PlaySelectedTrack()
+        {
+            if(CurrentTrackIndex>=0 &&CurrentTrackIndex<data.Count)
+            {
+                content = data[CurrentTrackIndex];
+                textBlockName.Text = content;
+                string fullFilePath = fileMap[content];
+                mediaPlayer.Open(new Uri(fullFilePath) );
+                mediaPlayer.Play();
+                updateTimer.Start();
+            }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
