@@ -22,6 +22,7 @@ namespace doan_TH
    
 {
     
+    
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -39,6 +40,7 @@ namespace doan_TH
         TextBlock textBlockName;
         private int CurrentTrackIndex;
         string content1 = "";
+        private double previousVolume;
         public MainWindow()
         {
             InitializeComponent();
@@ -259,5 +261,37 @@ namespace doan_TH
             updateTimer.Stop();
             Application.Current.Shutdown();
         }
+
+        private void btnVolume_Click(object sender, RoutedEventArgs e)
+        {
+            if (mediaPlayer.Volume > 0)
+            {
+                previousVolume = mediaPlayer.Volume;
+                mediaPlayer.Volume = 0;
+            }
+            else
+            {
+                mediaPlayer.Volume = previousVolume;
+            }
+            volumeSlider.Value = mediaPlayer.Volume;
+        }
+
+        private void volumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            double volumeValue = volumeSlider.Value;
+            mediaPlayer.Volume = volumeValue;
+        }
+
+        private void btnVolume_MouseEnter(object sender, MouseEventArgs e)
+        {
+            volumeSlider.Visibility = Visibility.Visible;
+        }
+
+        private void btnVolume_MouseLeave(object sender, MouseEventArgs e)
+        {
+            volumeSlider.Visibility = Visibility.Collapsed;
+        }
+
+
     }
 }

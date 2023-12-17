@@ -80,6 +80,23 @@
                                 <materialDesign:PackIcon Kind="FastForward" Width="20" Height="20" />
                             </StackPanel>
                         </Button>
+
+                        <Grid>
+
+                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10 0" ToolTip="Volume" x:Name="btnVolume" Click="btnVolume_Click" MouseEnter="btnVolume_MouseEnter" MouseLeave="btnVolume_MouseLeave">
+                                <StackPanel >
+                                    <materialDesign:PackIcon Kind="VolumeSource" Width="20" Height="20" />
+
+                                </StackPanel>
+
+                            </Button>
+                            <Slider x:Name="volumeSlider"  Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                            Maximum="100" Minimum="0" ValueChanged="volumeSlider_ValueChanged" Margin="0,40,0,0">
+                            </Slider>
+
+
+                        </Grid>
+
                     </WrapPanel>
                 </StackPanel>
                 <Grid Grid.Row="1">
