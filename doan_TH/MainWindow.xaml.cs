@@ -15,8 +15,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Data.SqlClient;
-using System.Data;
+using MaterialDesignThemes.Wpf;
+/*using System.Data.SqlClient;
+using System.Data;*/
 
 namespace doan_TH
    
@@ -28,9 +29,9 @@ namespace doan_TH
     /// </summary>
     public partial class MainWindow : Window
     {
-        string strcon = @"Data Source=LAPTOP-CL3NH660;Initial Catalog=music;Integrated Security=True";
-        SqlConnection sqlcon=null;
-        private DispatcherTimer updateTimer;
+/*        string strcon = @"Data Source=LAPTOP-CL3NH660;Initial Catalog=music;Integrated Security=True";
+        SqlConnection sqlcon = null;
+*/        private DispatcherTimer updateTimer;
         string fullfilepath;
         string content;
         string filename;
@@ -44,30 +45,31 @@ namespace doan_TH
         public MainWindow()
         {
             InitializeComponent();
-            if(sqlcon==null)
+/*            if (sqlcon == null)
             {
-                sqlcon= new SqlConnection(strcon);
+                sqlcon = new SqlConnection(strcon);
             }
-            if(sqlcon.State==ConnectionState.Closed)
+            if (sqlcon.State == ConnectionState.Closed)
             {
                 sqlcon.Open();
             }
-            SqlCommand sqlcmd=new     SqlCommand();
+            sqlcon = new SqlConnection(strcon);
+            SqlCommand sqlcmd = new SqlCommand();
             sqlcmd.CommandType = CommandType.Text;
             sqlcmd.CommandText = "select * from playlist";
             sqlcmd.Connection = sqlcon;
-           SqlDataReader reader= sqlcmd.ExecuteReader();
-           
-            data = new ObservableCollection<string>() {  };
+            SqlDataReader reader = sqlcmd.ExecuteReader();*/
+
+            data = new ObservableCollection<string>() { };
             lsvlist.ItemsSource = data;
-            while(reader.Read())
+            /*while (reader.Read())
             {
                 string name = reader.GetString(1);
-                string link=reader.GetString(0);
+                string link = reader.GetString(0);
                 data.Add(name);
                 fileMap[name] = link;
             }
-            reader.Close();
+            reader.Close();*/
             textBlockName = (TextBlock)FindName("Name");
             mediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
             timer = new DispatcherTimer();
@@ -122,10 +124,10 @@ namespace doan_TH
             Application.Current.Shutdown();
         }
        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
+       {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = true;
-            if (sqlcon == null)
+/*            if (sqlcon == null)
             {
                 sqlcon = new SqlConnection(strcon);
             }
@@ -133,34 +135,42 @@ namespace doan_TH
             {
                 sqlcon.Open();
             }
-            SqlCommand sqlcmd1 = new SqlCommand();
+            SqlCommand sqlcmd1 = new SqlCommand();*/
             if (openFileDialog.ShowDialog() == true)
-            {
-               
-                
-              //  foreach (String file in openFileDialog.FileNames)
-                  //  {
-                        fullfilepath = openFileDialog.FileName;
-                        filename = System.IO.Path.GetFileNameWithoutExtension(fullfilepath);
-                        data.Add(filename);
-                        fileMap[filename] = fullfilepath;
-                       
-                        sqlcmd1.CommandType = CommandType.Text;
-                        sqlcmd1.CommandText = "insert into playlist (link,name) "+"values (N'"+fullfilepath +"', N'"+filename+"')";
-                        sqlcmd1.Connection = sqlcon;
+            {     
 
-                try
+                foreach (String file in openFileDialog.FileNames)
                 {
-                    int kq = sqlcmd1.ExecuteNonQuery();
-                    if (kq > 0)
-                    {
-                        MessageBox.Show("them bai hat thanh cong");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred: " + ex.Message);
-                }
+                    fullfilepath = file;
+                    filename = System.IO.Path.GetFileNameWithoutExtension(fullfilepath);
+                    data.Add(filename);
+                    fileMap[filename] = fullfilepath;
+                }    
+                    
+
+                //  foreach (String file in openFileDialog.FileNames)
+                //  {
+                /*                fullfilepath = openFileDialog.FileName;
+                                filename = System.IO.Path.GetFileNameWithoutExtension(fullfilepath);
+                                data.Add(filename);
+                                fileMap[filename] = fullfilepath;
+
+                                sqlcmd1.CommandType = CommandType.Text;
+                                sqlcmd1.CommandText = "insert into playlist (link,name) " + "values (N'" + fullfilepath + "', N'" + filename + "')";
+                                sqlcmd1.Connection = sqlcon;
+
+                                try
+                                {
+                                    int kq = sqlcmd1.ExecuteNonQuery();
+                                    if (kq > 0)
+                                    {
+                                        MessageBox.Show("them bai hat thanh cong");
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show("An error occurred: " + ex.Message);
+                                }*/
 
 
                 // }
@@ -273,14 +283,37 @@ namespace doan_TH
             {
                 mediaPlayer.Volume = previousVolume;
             }
-            volumeSlider.Value = mediaPlayer.Volume;
+            volumeSlider.Value = mediaPlayer.Volume * 100.0;
+            double volumeValue = volumeSlider.Value;
+            setVolumeIcon(volumeValue);
+        }
+
+        private void setVolumeIcon(double volumeValue)
+        {
+            PackIconKind iconKind;
+
+            if (volumeValue == 0)
+            {
+                iconKind = PackIconKind.VolumeOff;
+            }
+            else if (volumeValue < 50)
+            {
+                iconKind = PackIconKind.VolumeLow;
+            } 
+            else
+            {
+                iconKind = PackIconKind.VolumeHigh;
+            }    
+            btnVolume.Content = new PackIcon { Kind = iconKind }; 
         }
 
         private void volumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             double volumeValue = volumeSlider.Value;
-            mediaPlayer.Volume = volumeValue;
+            mediaPlayer.Volume = volumeValue / 100.0;
+            setVolumeIcon(e.NewValue);
         }
+
 
         private void btnVolume_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -289,9 +322,45 @@ namespace doan_TH
 
         private void btnVolume_MouseLeave(object sender, MouseEventArgs e)
         {
-            volumeSlider.Visibility = Visibility.Collapsed;
+            
+            if(!IsMouseOverButtonOrSlider())
+            {
+                volumeSlider.Visibility = Visibility.Collapsed;
+            }    
         }
 
+        private bool IsMouseOverButtonOrSlider()
+        {
+            // Kiểm tra xem chuột có đang ở trên nút hoặc thanh trượt hay không
+            return btnVolume.IsMouseOver || volumeSlider.IsMouseOver || GridVolume.IsMouseOver;
+        }
+
+        private void Grid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            /*volumeSlider.Visibility = Visibility.Visible;
+            volumeSlider.Focus();*/
+        }
+
+        private void Grid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!IsMouseOverButtonOrSlider())
+            {
+                volumeSlider.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void volumeSlider_MouseEnter(object sender, MouseEventArgs e)
+        {
+            volumeSlider.Visibility = Visibility.Visible;
+        }
+
+        private void volumeSlider_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!IsMouseOverButtonOrSlider())
+            {
+                volumeSlider.Visibility = Visibility.Collapsed;
+            }
+        }
 
     }
 }
