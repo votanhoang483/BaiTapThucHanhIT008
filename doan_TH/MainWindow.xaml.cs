@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace doan_TH
    
@@ -25,7 +27,8 @@ namespace doan_TH
     /// </summary>
     public partial class MainWindow : Window
     {
-     
+        string strcon = @"Data Source=LAPTOP-CL3NH660;Initial Catalog=music;Integrated Security=True";
+        SqlConnection sqlcon=null;
         private DispatcherTimer updateTimer;
         string fullfilepath;
         string content;
@@ -39,8 +42,30 @@ namespace doan_TH
         public MainWindow()
         {
             InitializeComponent();
+            if(sqlcon==null)
+            {
+                sqlcon= new SqlConnection(strcon);
+            }
+            if(sqlcon.State==ConnectionState.Closed)
+            {
+                sqlcon.Open();
+            }
+            SqlCommand sqlcmd=new     SqlCommand();
+            sqlcmd.CommandType = CommandType.Text;
+            sqlcmd.CommandText = "select * from playlist";
+            sqlcmd.Connection = sqlcon;
+           SqlDataReader reader= sqlcmd.ExecuteReader();
+           
             data = new ObservableCollection<string>() {  };
             lsvlist.ItemsSource = data;
+            while(reader.Read())
+            {
+                string name = reader.GetString(1);
+                string link=reader.GetString(0);
+                data.Add(name);
+                fileMap[name] = link;
+            }
+            reader.Close();
             textBlockName = (TextBlock)FindName("Name");
             mediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
             timer = new DispatcherTimer();
@@ -50,6 +75,7 @@ namespace doan_TH
             updateTimer.Interval = TimeSpan.FromSeconds(1); // Cập nhật mỗi giây
             updateTimer.Tick += updateTimer_Tick;
             CurrentTrackIndex = 0;
+
         }
         
         private void MediaPlayer_MediaEnded(object sender, EventArgs e)
@@ -97,15 +123,47 @@ namespace doan_TH
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = true;
+            if (sqlcon == null)
+            {
+                sqlcon = new SqlConnection(strcon);
+            }
+            if (sqlcon.State == ConnectionState.Closed)
+            {
+                sqlcon.Open();
+            }
+            SqlCommand sqlcmd1 = new SqlCommand();
             if (openFileDialog.ShowDialog() == true)
             {
-                foreach (String file in openFileDialog.FileNames)
+               
+                
+              //  foreach (String file in openFileDialog.FileNames)
+                  //  {
+                        fullfilepath = openFileDialog.FileName;
+                        filename = System.IO.Path.GetFileNameWithoutExtension(fullfilepath);
+                        data.Add(filename);
+                        fileMap[filename] = fullfilepath;
+                       
+                        sqlcmd1.CommandType = CommandType.Text;
+                        sqlcmd1.CommandText = "insert into playlist (link,name) "+"values (N'"+fullfilepath +"', N'"+filename+"')";
+                        sqlcmd1.Connection = sqlcon;
+
+                try
                 {
-                    fullfilepath = file;
-                    filename = System.IO.Path.GetFileNameWithoutExtension(fullfilepath);
-                    data.Add(filename);
-                    fileMap[filename] = fullfilepath;
+                    int kq = sqlcmd1.ExecuteNonQuery();
+                    if (kq > 0)
+                    {
+                        MessageBox.Show("them bai hat thanh cong");
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+
+
+                // }
+
+
 
             }
             //string sampleMusicPath = @"C:\Users\ACER\Source\Repos\BaiTapThucHanhIT008\doan_TH\bin\Debug\sample.mp3";
