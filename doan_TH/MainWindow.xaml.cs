@@ -28,7 +28,7 @@ namespace doan_TH
     /// </summary>
     public partial class MainWindow : Window
     {
-        string strcon = @"Data Source=LAPTOP-CL3NH660;Initial Catalog=music;Integrated Security=True";
+        string strcon = @"Server=tcp:it008music.database.windows.net,1433;Initial Catalog=Music;Persist Security Info=False;User ID=IT008_TH;Password={Phamkhaihung123.};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
         SqlConnection sqlcon=null;
         private DispatcherTimer updateTimer;
         string fullfilepath;
