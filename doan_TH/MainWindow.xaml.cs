@@ -42,6 +42,8 @@ namespace doan_TH
         private int CurrentTrackIndex;
         string content1 = "";
         private double previousVolume;
+
+        private bool isPlaying = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -80,11 +82,23 @@ namespace doan_TH
             updateTimer.Tick += updateTimer_Tick;
             CurrentTrackIndex = 0;
 
+            mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
         }
         
         private void MediaPlayer_MediaEnded(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            mediaPlayer.Stop();
+            setPlayIcon();
+            isPlaying = false;
+            playNextSong();
+        }
+
+        private void playNextSong()
+        {
+            CurrentTrackIndex = (CurrentTrackIndex + 1) % data.Count;
+            PlaySelectedTrack();
+            setPlayIcon();
+            isPlaying = true;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -123,21 +137,21 @@ namespace doan_TH
         {
             Application.Current.Shutdown();
         }
-       private void btnAdd_Click(object sender, RoutedEventArgs e)
-       {
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = true;
-/*            if (sqlcon == null)
-            {
-                sqlcon = new SqlConnection(strcon);
-            }
-            if (sqlcon.State == ConnectionState.Closed)
-            {
-                sqlcon.Open();
-            }
-            SqlCommand sqlcmd1 = new SqlCommand();*/
+            /*            if (sqlcon == null)
+                        {
+                            sqlcon = new SqlConnection(strcon);
+                        }
+                        if (sqlcon.State == ConnectionState.Closed)
+                        {
+                            sqlcon.Open();
+                        }
+                        SqlCommand sqlcmd1 = new SqlCommand();*/
             if (openFileDialog.ShowDialog() == true)
-            {     
+            {
 
                 foreach (String file in openFileDialog.FileNames)
                 {
@@ -145,8 +159,8 @@ namespace doan_TH
                     filename = System.IO.Path.GetFileNameWithoutExtension(fullfilepath);
                     data.Add(filename);
                     fileMap[filename] = fullfilepath;
-                }    
-                    
+                }
+
 
                 //  foreach (String file in openFileDialog.FileNames)
                 //  {
@@ -170,7 +184,7 @@ namespace doan_TH
                                 catch (Exception ex)
                                 {
                                     MessageBox.Show("An error occurred: " + ex.Message);
-                                }*/
+                                }*//*
 
 
                 // }
@@ -181,7 +195,10 @@ namespace doan_TH
             //string sampleMusicPath = @"C:\Users\ACER\Source\Repos\BaiTapThucHanhIT008\doan_TH\bin\Debug\sample.mp3";
             //filename = System.IO.Path.GetFileNameWithoutExtension(sampleMusicPath);
             //data.Add(filename);
-            //fileMap[filename] = sampleMusicPath;
+            //fileMap[filename] = sampleMusicPath;*/
+
+
+            }
         }
 
         private void btnReMove_Click(object sender, RoutedEventArgs e)
@@ -209,12 +226,37 @@ namespace doan_TH
                 mediaPlayer.Play();
                 updateTimer.Start();
             }
-            if (content ==content1 )
+            if (content == content1)
             {
-               mediaPlayer.Play();
-            }   
+                mediaPlayer.Play();
+            }
+            if(isPlaying)
+            {
+                mediaPlayer.Pause();
+            }    
+            else
+            {
+                mediaPlayer.Play();
+            }    
+            setPlayIcon();
+            isPlaying = !isPlaying;
 
         }
+
+        public void setPlayIcon()
+        {
+            PackIconKind iconKind;
+            if (isPlaying)
+            {
+                iconKind = PackIconKind.Play;
+            }
+            else
+            {
+                iconKind = PackIconKind.Pause;
+            }
+            btnPlay.Content = new PackIcon { Kind = iconKind };
+        }
+
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
             
@@ -256,6 +298,8 @@ namespace doan_TH
             Button button = sender as Button;
             content = button.Content as string;
             textBlockName.Text = content;
+            isPlaying = false;
+            btnPlay_Click(sender, e);
         }
 
         private void TimerSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -331,8 +375,7 @@ namespace doan_TH
 
         private bool IsMouseOverButtonOrSlider()
         {
-            // Kiểm tra xem chuột có đang ở trên nút hoặc thanh trượt hay không
-            return btnVolume.IsMouseOver || volumeSlider.IsMouseOver || GridVolume.IsMouseOver;
+            return btnVolume.IsMouseOver || volumeSlider.IsMouseOver;
         }
 
         private void Grid_MouseEnter(object sender, MouseEventArgs e)

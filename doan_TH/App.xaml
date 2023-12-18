@@ -19,6 +19,13 @@
                 <Setter Property="Width" Value="40" />
                 <Setter Property="Height" Value="40" />
             </Style>
+            <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}" x:Key="CActionComboBoxs">
+                <Setter Property="Background" Value="#731101" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="BorderBrush" Value="#610F03" />
+                <Setter Property="Width" Value="40" />
+                <Setter Property="Height" Value="40" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -7,6 +7,9 @@
         xmlns:local="clr-namespace:doan_TH" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="830" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Background="{x:Null}">
+    <Window.Resources>
+        <ResourceDictionary Source="./ScrollBarStyle.xaml"/>
+    </Window.Resources>
     <Grid>
         <materialDesign:Card Margin="10" UniformCornerRadius="20" Background="{x:Null}" MouseDown="Card_MouseDown">
             <Grid>
@@ -23,114 +26,196 @@
                         </LinearGradientBrush>
                     </StackPanel.Background>
                     <Grid Height="70">
-                        <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Left" Margin="20 0" ToolTip="Open File" x:Name="btnFile" Click="btnAdd_Click">
+
+                        <Button Style="{StaticResource CActionButtons}" 
+                                HorizontalAlignment="Left" 
+                                Margin="20 0" 
+                                ToolTip="Open File" 
+                                x:Name="btnFile" 
+                                Click="btnAdd_Click">
                             <StackPanel Margin="-5">
-                                <materialDesign:PackIcon Kind="Add" Width="20" Height="20" />
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="20 0" ToolTip="Close" x:Name="btnClose" Click="btnClose_Click">
-                            <StackPanel Margin="-5">
-                                <materialDesign:PackIcon Kind="Close" Width="20" Height="20" />
+                                <materialDesign:PackIcon 
+                                    Kind="Add" 
+                                    Width="20" 
+                                    Height="20" />
                             </StackPanel>
                         </Button>
 
-                        <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Center" Margin="20 0" ToolTip="Open File" x:Name="btnReMove" Click="btnReMove_Click">
+                        <Button Style="{StaticResource CActionButtons}" 
+                                HorizontalAlignment="Center" 
+                                Margin="20 0" 
+                                ToolTip="Open File" 
+                                x:Name="btnReMove" 
+                                Click="btnReMove_Click">
                             <StackPanel Margin="-5">
-                                <materialDesign:PackIcon Kind="Minus" Width="20" Height="20" />
+                                <materialDesign:PackIcon 
+                                    Kind="Minus" 
+                                    Width="20" 
+                                    Height="20" />
                             </StackPanel>
                         </Button>
+
+                        <Button Style="{StaticResource CActionButtons}" 
+                                HorizontalAlignment="Right" 
+                                Margin="20 0" 
+                                ToolTip="Close" 
+                                x:Name="btnClose" 
+                                Click="btnClose_Click">
+                            <StackPanel Margin="-5">
+                                <materialDesign:PackIcon 
+                                    Kind="Close" 
+                                    Width="20" 
+                                    Height="20" />
+                            </StackPanel>
+                        </Button>
+
+
                     </Grid>
-                    <Image Margin="10" Height="200" x:Name="Musicimg" Stretch="Uniform" Source="C:\Users\PC\Downloads\MusicIcon.png" />
-
-                    <TextBlock Margin="10" FontSize="15" Text="Song name" Foreground="White" TextAlignment="Center" FontWeight="SemiBold" x:Name="lblSongname" />
-                    <Viewbox MaxHeight="30" Margin="15 0">
-                        <TextBlock  x:Name="Name"  Text="Choose a song" Foreground="White" TextAlignment="Center" FontWeight="ExtraLight" />
+                    <Image Margin="10" 
+                           Height="200" 
+                           x:Name="Musicimg" 
+                           Stretch="UniformToFill" 
+                           Source="./Assets/Images/Music.jpg"
+                           />
+                    <TextBlock 
+                        Margin="10" 
+                        FontSize="15" 
+                        Text="Song name" 
+                        Foreground="White" 
+                        TextAlignment="Center" 
+                        FontWeight="SemiBold" 
+                        x:Name="lblSongname" />
+                    <Viewbox MaxHeight="30" 
+                             Margin="15 0">
+                        <TextBlock x:Name="Name"  
+                                   Text="Choose a song" 
+                                   Foreground="White" 
+                                   TextAlignment="Center" 
+                                   FontWeight="ExtraLight" />
                     </Viewbox>
                     <Grid Margin="0 30 0 0">
-                        <TextBlock FontSize="11" Text="00:00" Margin="20,0,0,0" Foreground="White" FontWeight="ExtraLight" TextAlignment="Center" HorizontalAlignment="Left" x:Name="lblCurrenttime" Height="15" VerticalAlignment="Top" />
-                        <TextBlock FontSize="11" Text="00:00" Margin="20 0" Foreground="White" FontWeight="ExtraLight" TextAlignment="Center" HorizontalAlignment="Right" x:Name="lblMusiclength" />
+                        <TextBlock FontSize="11" 
+                                   Text="00:00" 
+                                   Margin="20,0,0,0" 
+                                   Foreground="White" 
+                                   FontWeight="ExtraLight" 
+                                   TextAlignment="Center" 
+                                   HorizontalAlignment="Left" 
+                                   x:Name="lblCurrenttime" 
+                                   Height="15" 
+                                   VerticalAlignment="Top" />
+                        <TextBlock FontSize="11" 
+                                   Text="00:00" 
+                                   Margin="20 0" 
+                                   Foreground="White" 
+                                   FontWeight="ExtraLight" 
+                                   TextAlignment="Center" 
+                                   HorizontalAlignment="Right" 
+                                   x:Name="lblMusiclength" />
                     </Grid>
-                    <Slider Value="0" Minimum="1" Maximum="50" Margin="20 0" Foreground="#FF731101" x:Name="TimerSlider" ValueChanged="TimerSlider_ValueChanged" />
+                    <Slider Value="0" 
+                            Minimum="1" 
+                            Maximum="50" 
+                            Margin="20 0" 
+                            Foreground="#FF731101" 
+                            x:Name="TimerSlider" 
+                            ValueChanged="TimerSlider_ValueChanged" />
 
-                    <Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition  Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <WrapPanel  VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20">
+                    <Grid Height="82" >
 
-                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play Next" x:Name="btnPrevious" Click="btnPrevious_Click">
+                        <WrapPanel VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center" 
+                                   Width="460">
+
+                            <Button Style="{StaticResource CActionButtons}" 
+                                    HorizontalAlignment="Right" 
+                                    Margin="30 0 10 0" 
+                                    ToolTip="Play Next" 
+                                    x:Name="btnPrevious" 
+                                    Click="btnPrevious_Click">
                                 <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="FastRewind" Width="20" Height="20" />
+                                    <materialDesign:PackIcon 
+                                        Kind="FastRewind" 
+                                        Width="20" 
+                                        Height="20" />
                                 </StackPanel>
                             </Button>
-                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play" x:Name="btnPlay" Click="btnPlay_Click">
+                            <Button Style="{StaticResource CActionButtons}" 
+                                    HorizontalAlignment="Right" 
+                                    Margin="10 0" 
+                                    ToolTip="Play" 
+                                    x:Name="btnPlay" 
+                                    Click="btnPlay_Click" >
                                 <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="Play" Width="20" Height="20" />
+                                    <materialDesign:PackIcon 
+                                        Kind="Play" 
+                                        Width="20" 
+                                        Height="20" />
                                 </StackPanel>
                             </Button>
-                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play" x:Name="btnRePlay" Click="btnRePlay_Click">
+                            <Button Style="{StaticResource CActionButtons}" 
+                                    HorizontalAlignment="Right" 
+                                    Margin="10 0" 
+                                    ToolTip="Play" 
+                                    x:Name="btnRePlay" 
+                                    Click="btnRePlay_Click">
                                 <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="Repeat" Width="20" Height="20" />
-                                </StackPanel>
-                            </Button>
-                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play" x:Name="btnPause" Click="btnPause_Click">
-                                <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="Pause" Width="20" Height="20" />
-                                </StackPanel>
-                            </Button>
-
-
-                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play Next" x:Name="btnNext" Click="btnNext_Click">
-                                <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="FastForward" Width="20" Height="20" />
+                                    <materialDesign:PackIcon 
+                                        Kind="Repeat" 
+                                        Width="20" 
+                                        Height="20" />
                                 </StackPanel>
                             </Button>
 
 
-                        </WrapPanel>
-                        <Grid x:Name="GridVolume" 
-                              Grid.Column="1" 
-                              MouseEnter="Grid_MouseEnter" 
-                              MouseLeave="Grid_MouseLeave">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="41*"/>
+                            <Button Style="{StaticResource CActionButtons}" 
+                                    HorizontalAlignment="Right" 
+                                    Margin="10 0" 
+                                    ToolTip="Play Next" 
+                                    x:Name="btnNext" 
+                                    Click="btnNext_Click">
+                                <StackPanel Margin="-5">
+                                    <materialDesign:PackIcon 
+                                        Kind="FastForward" 
+                                        Width="20" 
+                                        Height="20" />
+                                </StackPanel>
+                            </Button>
 
-                                <ColumnDefinition Width="119*"/>
-                            </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource CActionButtons}" 
                                     HorizontalAlignment="Center"  
                                     ToolTip="Volume" 
                                     x:Name="btnVolume" 
                                     Click="btnVolume_Click" 
-                                    MouseEnter="btnVolume_MouseEnter" 
-                                    MouseLeave="btnVolume_MouseLeave" 
-                                    Margin="0,20,0,20" Width="40">
-                                <StackPanel >
-                                    <materialDesign:PackIcon Kind="VolumeSource" 
-                                                             Width="20" 
-                                                             Height="20" />
+                                    Margin="10 0" Width="40">
+                                <StackPanel Margin="-5" >
+                                    <materialDesign:PackIcon 
+                                        Kind="VolumeSource" 
+                                        Width="20" 
+                                        Height="20" />
 
                                 </StackPanel>
 
                             </Button>
                             <Slider x:Name="volumeSlider" 
-                                    Width="100" 
-                                    HorizontalAlignment="Left" 
-                                    VerticalAlignment="Center"
-                                    Maximum="100" 
-                                    Minimum="0" 
-                                    Value="100" 
-                                    Visibility="Collapsed"
-                                    ValueChanged="volumeSlider_ValueChanged"
-                                    MouseEnter="volumeSlider_MouseEnter" 
-                                    MouseLeave="volumeSlider_MouseLeave" 
-                                    Grid.Column="1">
-                            </Slider>
-                        </Grid>
+                                Width="100" 
+                                    Margin="10 0"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center"
+                                Maximum="100" 
+                                Minimum="0" 
+                                Value="100" 
+                                Visibility="Visible"
+                                ValueChanged="volumeSlider_ValueChanged"
+                                />
+
+
+                        </WrapPanel>
+
 
                     </Grid>
                 </StackPanel>
+
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="67*"/>
@@ -145,14 +230,25 @@
                         </RadialGradientBrush>
                     </Grid.Background>
 
-                    <ListView x:Name="lsvlist"
-                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                              ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.ColumnSpan="3">
-                        <ListView.ItemTemplate >
+
+
+
+                    <ListView x:Name="lsvlist" 
+                            Grid.ColumnSpan="3" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+
+                        <ListView.ItemTemplate>
                             <DataTemplate>
+
                                 <Grid>
 
-                                    <Button  Click="Button_Click"  Content="{Binding}" Background="#FF731101" Foreground="White" FontSize="15" Width="460" Height="50">
+                                    <Button  Click="Button_Click"  
+                                             Content="{Binding}" 
+                                             Background="#FF731101" 
+                                             Foreground="White" 
+                                             FontSize="15" 
+                                             Width="460" 
+                                             Height="50"
+                                             >
                                     </Button>
 
                                 </Grid>
@@ -161,8 +257,16 @@
                     </ListView>
 
 
+
+
+
+
+
                 </Grid>
-                <Border Grid.Row="2" BorderBrush="#FF595757" BorderThickness="5" CornerRadius="0, 0, 20, 20">
+                <Border Grid.Row="2" 
+                        BorderBrush="#FF595757" 
+                        BorderThickness="5" 
+                        CornerRadius="0, 0, 20, 20">
                     <Grid Grid.Row="2" >
                         <Grid.Background>
                             <RadialGradientBrush>
