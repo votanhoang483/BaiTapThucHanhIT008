@@ -264,6 +264,15 @@ namespace doan_TH
                 PlaySelectedTrack();
             }
         }
+        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if(data.Count>0 &&content !=null)
+            {
+                CurrentTrackIndex = (CurrentTrackIndex - 1 + data.Count) % data.Count;
+                PlaySelectedTrack();
+            }
+        }
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
             if (content != content1 && content!=null )
@@ -305,15 +314,6 @@ namespace doan_TH
             btnPlay.Content = new PackIcon { Kind = iconKind };
         }
 
-        private void btnPrevious_Click(object sender, RoutedEventArgs e)
-        {
-            
-            if(data.Count>0 &&content !=null)
-            {
-                CurrentTrackIndex=(CurrentTrackIndex-1+data.Count)%data.Count;
-                PlaySelectedTrack();
-            }
-        }
    
         private void btnPause_Click(object sender, RoutedEventArgs e)
         {
