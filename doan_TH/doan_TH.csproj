@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\Music.jpg" />
+    <Resource Include="icon_1.png" />
     <Content Include="test\5016944936596504302.mp4" />
   </ItemGroup>
   <ItemGroup>

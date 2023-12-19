@@ -153,14 +153,7 @@ namespace doan_TH
                 sqlcon.Open();
             }
            
-            if (sqlcon == null)
-                        { 
-                            sqlcon = new SqlConnection(strcon);
-                        }
-                        if (sqlcon.State == ConnectionState.Closed)
-                        {
-                            sqlcon.Open();
-                        }
+         
                         SqlCommand sqlcmd1 = new SqlCommand();
 
             if (openFileDialog.ShowDialog() == true)
@@ -186,7 +179,7 @@ namespace doan_TH
                     int kq = sqlcmd1.ExecuteNonQuery();
                     if (kq > 0)
                     {
-                        MessageBox.Show("them bai hat thanh cong");
+                        MessageBox.Show("Add Song successfully");
                     }
                 }
                 catch (Exception ex)
@@ -198,18 +191,7 @@ namespace doan_TH
                 sqlcmd1.CommandText = "insert into playlist (link,name) " + "values (N'" + fullfilepath + "', N'" + filename + "')";
                 sqlcmd1.Connection = sqlcon;
 
-                try
-                {
-                    int kq = sqlcmd1.ExecuteNonQuery();
-                    if (kq > 0)
-                    {
-                        MessageBox.Show("them bai hat thanh cong");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred: " + ex.Message);
-                }
+             
             }
 
 
@@ -236,7 +218,7 @@ namespace doan_TH
                 int kq = sqlcmd2.ExecuteNonQuery();
                 if (kq > 0)
                 {
-                    MessageBox.Show("xoa bai hat thanh cong");
+                    MessageBox.Show("Delete Song successfully");
                 }
             }
             catch (Exception ex)
