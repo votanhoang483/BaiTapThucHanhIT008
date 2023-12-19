@@ -41,7 +41,7 @@
                             </StackPanel>
                         </Button>
                     </Grid>
-                    <Image Margin="10" Height="200" x:Name="Musicimg" Stretch="Uniform" Source="C:\Users\PC\Downloads\MusicIcon.png" />
+                    <Image Margin="10" Height="200" x:Name="Musicimg" Stretch="Uniform" Source="MusicIcon.png" />
 
                     <TextBlock Margin="10" FontSize="15" Text="Song name" Foreground="White" TextAlignment="Center" FontWeight="SemiBold" x:Name="lblSongname" />
                     <Viewbox MaxHeight="30" Margin="15 0">
