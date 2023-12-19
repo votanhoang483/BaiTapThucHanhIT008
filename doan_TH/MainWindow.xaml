@@ -57,9 +57,9 @@
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition  Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <WrapPanel  VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20">
+                        <WrapPanel  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 20">
 
-                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play Next" x:Name="btnPrevious" Click="btnPrevious_Click">
+                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Previous" x:Name="btnPrevious" Click="btnPrevious_Click">
                                 <StackPanel Margin="-5">
                                     <materialDesign:PackIcon Kind="FastRewind" Width="20" Height="20" />
                                 </StackPanel>
@@ -69,19 +69,14 @@
                                     <materialDesign:PackIcon Kind="Play" Width="20" Height="20" />
                                 </StackPanel>
                             </Button>
-                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play" x:Name="btnRePlay" Click="btnRePlay_Click">
+                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="RePlay" x:Name="btnRePlay" Click="btnRePlay_Click">
                                 <StackPanel Margin="-5">
                                     <materialDesign:PackIcon Kind="Repeat" Width="20" Height="20" />
                                 </StackPanel>
                             </Button>
-                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play" x:Name="btnPause" Click="btnPause_Click">
-                                <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="Pause" Width="20" Height="20" />
-                                </StackPanel>
-                            </Button>
+                            
 
-
-                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Play Next" x:Name="btnNext" Click="btnNext_Click">
+                            <Button Style="{StaticResource CActionButtons}" HorizontalAlignment="Right" Margin="10 0" ToolTip="Next" x:Name="btnNext" Click="btnNext_Click">
                                 <StackPanel Margin="-5">
                                     <materialDesign:PackIcon Kind="FastForward" Width="20" Height="20" />
                                 </StackPanel>
@@ -94,12 +89,12 @@
                               MouseEnter="Grid_MouseEnter" 
                               MouseLeave="Grid_MouseLeave">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="41*"/>
+                                <ColumnDefinition Width="50*"/>
 
-                                <ColumnDefinition Width="119*"/>
+                                <ColumnDefinition Width="100*"/>
                             </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource CActionButtons}" 
-                                    HorizontalAlignment="Center"  
+                                    HorizontalAlignment="Right"  
                                     ToolTip="Volume" 
                                     x:Name="btnVolume" 
                                     Click="btnVolume_Click" 
