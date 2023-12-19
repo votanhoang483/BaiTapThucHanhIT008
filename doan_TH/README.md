@@ -14,17 +14,19 @@
 
 
 ## 2. Description: 
-Music Player là một ứng dụng phát playlist có sẵn, với các bài hát được thêm vào từ máy tính.
+Music Player là một ứng dụng phát playlist có sẵn, với các bài hát được thêm vào từ máy tính hoặc tải trực tiếp từ YouTube trên ứng dụng bằng đường dẫn.
 
 ---
 
-Music Player is an application that used for playing a playlist, which songs were added from your computer.
+Music Player is an application that used for playing a playlist, which songs were added from your computer or were directly downloaded from YouTube on this application by link.
 ## 3. Feature:
 * Thêm nhạc từ máy tính vào playlist có sẵn (file mp3).
+* Tải nhạc bằng đường dẫn vào playlist có sẵn (file mp4).
 * Phát nhạc từ playlist.
 
 ---
 * Add songs into playlist.
+* Download media by link into playlist.
 * Play the playlist.
 
 
@@ -33,11 +35,11 @@ Music Player is an application that used for playing a playlist, which songs wer
 ## 4. How to use:
 * Bước 1: Tải source từ : https://github.com/votanhoang483/BaiTapThucHanhIT008
 * Bước 2: Khởi động ứng dụng bằng cách ấn nút "Run" trên Visual Studio
-* Bước 3: Thêm bài hát yêu thích và nghe.
+* Bước 3: Thêm bài hát yêu thích hoặc tải về từ đường dẫn và nghe.
 ---
 * Step 1: Clone the repository from : https://github.com/votanhoang483/BaiTapThucHanhIT008
 * Step 2: Open the application by click "Run" button on Visual Studio
-* Step 3: .Add your favourite songs and listen them.
+* Step 3: .Add your favourite songs or download them and listen.
 
 ## 5. Video demo: 
 * Link:
