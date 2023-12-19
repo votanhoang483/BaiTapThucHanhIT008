@@ -19,20 +19,24 @@ using MaterialDesignThemes.Wpf;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Markup;
+using VideoLibrary;
+using System.IO;
+using System.CodeDom;
 
 namespace doan_TH
-   
+
 {
-    
-    
+
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+       
 
         string strcon = @"Server=tcp:it008music.database.windows.net,1433;Initial Catalog=Music;Persist Security Info=False;User ID=IT008_TH;Password=Phamkhaihung123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
-        SqlConnection sqlcon=null;
+        SqlConnection sqlcon = null;
         private DispatcherTimer updateTimer;
         string fullfilepath;
         string content;
@@ -48,7 +52,9 @@ namespace doan_TH
         private bool isPlaying = false;
         public MainWindow()
         {
+
             InitializeComponent();
+            
             if (sqlcon == null)
             {
                 sqlcon = new SqlConnection(strcon);
@@ -57,7 +63,7 @@ namespace doan_TH
             {
                 sqlcon.Open();
             }
-            
+
             SqlCommand sqlcmd = new SqlCommand();
             sqlcmd.CommandType = CommandType.Text;
             sqlcmd.CommandText = "select * from playlist";
@@ -86,7 +92,7 @@ namespace doan_TH
 
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
         }
-        
+
         private void MediaPlayer_MediaEnded(object sender, EventArgs e)
         {
             mediaPlayer.Stop();
@@ -129,8 +135,8 @@ namespace doan_TH
                 lblMusiclength.Text = duration.ToString(@"mm\:ss");
             }
         }
-        MediaPlayer mediaPlayer=new MediaPlayer();
-     
+        MediaPlayer mediaPlayer = new MediaPlayer();
+
         private void Card_MouseDown(object sender, MouseEventArgs e)
         {
             DragMove();
@@ -144,7 +150,7 @@ namespace doan_TH
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = true;
 
-           if (sqlcon == null)
+            if (sqlcon == null)
             {
                 sqlcon = new SqlConnection(strcon);
             }
@@ -152,9 +158,9 @@ namespace doan_TH
             {
                 sqlcon.Open();
             }
-           
-         
-                        SqlCommand sqlcmd1 = new SqlCommand();
+
+
+            SqlCommand sqlcmd1 = new SqlCommand();
 
             if (openFileDialog.ShowDialog() == true)
             {
@@ -191,11 +197,11 @@ namespace doan_TH
                 sqlcmd1.CommandText = "insert into playlist (link,name) " + "values (N'" + fullfilepath + "', N'" + filename + "')";
                 sqlcmd1.Connection = sqlcon;
 
-             
+
             }
 
 
-                }
+        }
         private void btnReMove_Click(object sender, RoutedEventArgs e)
         {
             if (sqlcon == null)
@@ -242,8 +248,8 @@ namespace doan_TH
         }
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
-            
-            if(data.Count>0 &&content !=null)
+
+            if (data.Count > 0 && content != null)
             {
                 CurrentTrackIndex = (CurrentTrackIndex - 1 + data.Count) % data.Count;
                 PlaySelectedTrack();
@@ -251,7 +257,7 @@ namespace doan_TH
         }
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-            if (content != content1 && content!=null )
+            if (content != content1 && content != null)
             {
                 string fullFilePath = fileMap[content];
                 mediaPlayer.Open(new Uri(fullFilePath));
@@ -263,14 +269,14 @@ namespace doan_TH
             {
                 mediaPlayer.Play();
             }
-            if(isPlaying)
+            if (isPlaying)
             {
                 mediaPlayer.Pause();
-            }    
+            }
             else
             {
                 mediaPlayer.Play();
-            }    
+            }
             setPlayIcon();
             isPlaying = !isPlaying;
 
@@ -290,7 +296,7 @@ namespace doan_TH
             btnPlay.Content = new PackIcon { Kind = iconKind };
         }
 
-   
+
         private void btnPause_Click(object sender, RoutedEventArgs e)
         {
             mediaPlayer.Pause();
@@ -307,12 +313,12 @@ namespace doan_TH
         }
         private void PlaySelectedTrack()
         {
-            if(CurrentTrackIndex>=0 &&CurrentTrackIndex<data.Count)
+            if (CurrentTrackIndex >= 0 && CurrentTrackIndex < data.Count)
             {
                 content = data[CurrentTrackIndex];
                 textBlockName.Text = content;
                 string fullFilePath = fileMap[content];
-                mediaPlayer.Open(new Uri(fullFilePath) );
+                mediaPlayer.Open(new Uri(fullFilePath));
                 mediaPlayer.Play();
                 updateTimer.Start();
             }
@@ -367,12 +373,12 @@ namespace doan_TH
             else if (volumeValue < 50)
             {
                 iconKind = PackIconKind.VolumeLow;
-            } 
+            }
             else
             {
                 iconKind = PackIconKind.VolumeHigh;
-            }    
-            btnVolume.Content = new PackIcon { Kind = iconKind }; 
+            }
+            btnVolume.Content = new PackIcon { Kind = iconKind };
         }
 
         private void volumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -390,19 +396,19 @@ namespace doan_TH
 
         private void btnVolume_MouseLeave(object sender, MouseEventArgs e)
         {
-            
-            if(!IsMouseOverButtonOrSlider())
+
+            if (!IsMouseOverButtonOrSlider())
             {
                 volumeSlider.Visibility = Visibility.Collapsed;
-            }    
+            }
         }
 
         private bool IsMouseOverButtonOrSlider()
         {
 
-            return btnVolume.IsMouseOver || volumeSlider.IsMouseOver ;
+            return btnVolume.IsMouseOver || volumeSlider.IsMouseOver;
 
-       
+
 
         }
 
@@ -432,6 +438,36 @@ namespace doan_TH
                 volumeSlider.Visibility = Visibility.Collapsed;
             }
         }
+      
 
+        public void DownloadVideo(string url)
+        {
+            var yt = YouTube.Default;
+            var video = yt.GetVideo(url);
+            File.WriteAllBytes(@"C:\Users\PC\Videos\" + video.FullName, video.GetBytes());
+            try
+            {
+                data.Add(video.FullName);
+                fileMap[video.FullName] = @"C:\Users\PC\Videos\" + video.FullName;
+            }
+            catch {
+                MessageBox.Show("Loi");
+            }
+        }
+
+        private void btnPreviouss_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DownloadVideo(txt_url.Text);
+                MessageBox.Show("Tai ve thanh cong");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+            
+        }
     }
 }
