@@ -19,6 +19,12 @@ using MaterialDesignThemes.Wpf;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Markup;
+using HtmlAgilityPack;
+using System.Net;
+using System.Xml;
+using System.Xml.Linq;
+using VideoLibrary;
+using System.IO;
 
 namespace doan_TH
    
@@ -431,6 +437,26 @@ namespace doan_TH
             {
                 volumeSlider.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Download(Link.Text);
+                MessageBox.Show("Downloaded");
+            }
+            catch
+            {
+                MessageBox.Show("Failed to download");
+            }
+        }
+     
+        public void Download(string s)
+        {
+            var yt = YouTube.Default;
+            var video = yt.GetVideo(s);
+            File.WriteAllBytes(@"C: \Users\PC\OneDrive\Máy tính\BaiTapThucHanhIT008\doan_TH\Downloaded media\"+video.FullName,video.GetBytes());
         }
 
     }
