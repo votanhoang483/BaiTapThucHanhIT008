@@ -42,7 +42,7 @@ Music Player is an application that used for playing a playlist, which songs wer
 * Step 3: .Add your favourite songs or download them and listen.
 
 ## 5. Video demo: 
-* Link:
+* Link: https://www.youtube.com/watch?v=KEmqgC70zlE
 
 
 ## 6. License
