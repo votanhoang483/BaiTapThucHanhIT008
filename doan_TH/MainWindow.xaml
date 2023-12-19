@@ -175,9 +175,15 @@
                         </Grid.Background>
 
                         <Grid Grid.Column="1">
-                            <TextBox x:Name="txt_url" FontSize="20" Foreground="White" >
+                          
+
+                            <TextBox x:Name="Link" FontSize="20" Foreground="White" Margin="0,0,143,0" >
+
 
                             </TextBox>
+                            <Button FontSize="20" Margin="332,5,0,5" Content="Download" Click="Button_Click_1" >
+                                
+                            </Button>
                         </Grid>
 
                     </Grid>
