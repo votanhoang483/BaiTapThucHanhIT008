@@ -18,3 +18,7 @@
 |      | 1.3 + 1.4| Hoàng Nhật      |
 |      | 1.5      |    Khải Hưng    |
 |      | 1.6      |   Tấn Hoàng     |
+|2     | 2.4      |Khải Hưng        |
+|      | 2.5      | Tấn Hoàng       |
+|      | 2.7      | TIến Hưng       |
+|      | 2.8      | Hoàng Nhật      |
